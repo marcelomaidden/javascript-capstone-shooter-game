@@ -55,7 +55,7 @@ export default class PreloaderScene extends Phaser.Scene {
     assetText.setOrigin(0.5, 0.5);
 
     // update progress bar
-    this.load.on('progress', function (value) {
+    this.load.on('progress', (value) => {
       percentText.setText(parseInt(value * 100) + '%');
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
@@ -63,22 +63,20 @@ export default class PreloaderScene extends Phaser.Scene {
     });
 
     // update file progress text
-    this.load.on('fileprogress', function (file) {
+    this.load.on('fileprogress', (file) => {
       assetText.setText('Loading asset: ' + file.key);
     });
 
     // remove progress bar when complete
-    this.load.on('complete', function () {
+    this.load.on('complete', () => {
       progressBar.destroy();
       progressBox.destroy();
       loadingText.destroy();
       percentText.destroy();
       assetText.destroy();
       this.ready();
-    }.bind(this));
-
-    this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
-
+    })
+  
     // load assets needed in our game
     this.load.image('blueButton1', 'assets/ui/blue_button02.png');
     this.load.image('blueButton2', 'assets/ui/blue_button03.png');
@@ -86,10 +84,6 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready () {
-    this.scene.start('Title');
-    this.readyCount++;
-    if (this.readyCount === 2) {
-      this.scene.start('Title');
-    }
+    this.scene.transition({ target: 'Title', duration: 2000 });    
   }
 };
