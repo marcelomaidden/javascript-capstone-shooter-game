@@ -1,5 +1,6 @@
 /* global Phaser */
 import 'phaser';
+import Player from '../Characters/Player';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -84,12 +85,8 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 20
     });
 
-    this.player = this.physics.add.sprite(100, 100, 'hero').setScale(0.5)
-        
-    this.player.setBounce(1, 1);
-    this.player.setCollideWorldBounds(true);
-    this.player.setGravityY(20000);
-    this.player.body.setSize(150, 250)
+    //this.player = this.physics.add.sprite(100, 100, 'hero').setScale(0.5)
+    this.player = new Player(this, 100, 100, 'hero');
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.platforms = this.physics.add.staticGroup();
@@ -104,26 +101,6 @@ export default class GameScene extends Phaser.Scene {
 
   update ()
   {
-      this.player.setVelocity(0);
-
-      if (this.cursors.left.isDown)
-      {
-          this.player.setVelocityX(-160);
-          this.player.anims.play('left', true);
-      }
-      else if (this.cursors.right.isDown)
-      {
-          this.player.setVelocityX(160);
-          this.player.anims.play('right', true);
-      }
-      else {
-        this.player.setVelocityX(0);
-
-        this.player.anims.play('turn');
-      }
-
-      if (this.cursors.up.isDown){
-        this.player.setVelocityY(-800);
-      }
+    this.player.update()
   }
 }
