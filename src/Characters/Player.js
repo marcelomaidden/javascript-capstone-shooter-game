@@ -18,7 +18,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
         {key: 'hero9'},
         {key: 'hero10'},
       ],
-      frameRate: 8,
+      frameRate: 20,
       repeat: 0
     })
 
@@ -37,7 +37,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
         {key: 'hero19'},
         {key: 'hero20'},
       ],
-      frameRate: 8,
+      frameRate: 20,
       repeat: 0
     });
 
@@ -87,7 +87,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
     if (this.scene.cursors.up.isDown && this.body.touching.down){
       setTimeout(() => {
         this.body.velocity.y = -1000;  
-      }, 280);        
+      }, 260);        
     }
   }
 }
