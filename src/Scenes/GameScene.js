@@ -84,11 +84,12 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 20
     });
 
-    this.player = this.physics.add.sprite(100, 450, 'hero').setScale(0.5)
+    this.player = this.physics.add.sprite(100, 100, 'hero').setScale(0.5)
         
-    this.player.setBounce(0.2);
+    this.player.setBounce(1, 1);
     this.player.setCollideWorldBounds(true);
     this.player.setGravityY(20000);
+    this.player.body.setSize(150, 250)
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.platforms = this.physics.add.staticGroup();
