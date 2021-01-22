@@ -37,55 +37,7 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     const bg = this.add.image(400, 0, 'background');
-    /*Add hero to the game physics */
-
-    this.anims.create({
-      key: 'right', 
-      frames: [
-        {key: 'hero1'},
-        {key: 'hero2'},
-        {key: 'hero3'},
-        {key: 'hero4'},
-        {key: 'hero5'},
-        {key: 'hero6'},
-        {key: 'hero7'},
-        {key: 'hero8'},
-        {key: 'hero9'},
-        {key: 'hero10'},
-      ],
-      frameRate: 8,
-      repeat: 0
-    })
-
-
-    this.anims.create({
-      key: 'left', 
-      frames: [
-        {key: 'hero11'},
-        {key: 'hero12'},
-        {key: 'hero13'},
-        {key: 'hero14'},
-        {key: 'hero15'},
-        {key: 'hero16'},
-        {key: 'hero17'},
-        {key: 'hero18'},
-        {key: 'hero19'},
-        {key: 'hero20'},
-      ],
-      frameRate: 8,
-      repeat: 0
-    });
-
-    this.anims.create({
-      key: 'turn',
-      frames: [ 
-        { 
-          key: 'hero1'
-        } ],
-      frameRate: 20
-    });
-
-    //this.player = this.physics.add.sprite(100, 100, 'hero').setScale(0.5)
+    
     this.player = new Player(this, 100, 100, 'hero');
     this.cursors = this.input.keyboard.createCursorKeys();
 
