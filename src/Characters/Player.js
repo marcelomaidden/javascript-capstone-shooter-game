@@ -87,7 +87,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
     if (this.scene.cursors.up.isDown && this.body.touching.down){
       setTimeout(() => {
         this.body.velocity.y = -1000;  
-      }, 300);        
+      }, 280);        
     }
   }
 }
