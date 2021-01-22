@@ -58,7 +58,11 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite  {
     this.state = "CHASE";
     var dx = this.scene.player.x - this.x;
     var dy = this.scene.player.y - this.y;
-
+    if(dx <=0 )
+      this.flipX = false;
+    else
+      this.flipX = true;
+    
     var angle = Math.atan2(dy, dx);
 
     var speed = 50;

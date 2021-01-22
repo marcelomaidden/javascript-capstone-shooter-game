@@ -93,7 +93,7 @@ export default class GameScene extends Phaser.Scene {
     let randomPlace = [0, 300, 450, 420]; 
 
     this.time.addEvent({
-      delay: 2000,
+      delay: 6000,
       callback: function() {
         let random = Math.floor(Math.random() * (3 - 0));
         let zombie = new Zombie(this, 750, 
