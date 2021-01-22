@@ -51,16 +51,20 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite  {
     this.scene = scene;
     this.addAnimation();
     this.play('zombie_walk');
-    // this.scene.tweens.add({
-    //   targets: this,
-    //   x: 0,
-    //   duration: 8800,
-    //   ease: 'Linear'
-    // });
   }
 
   update() {
     this.body.velocity.y = 0;
     this.state = "CHASE";
+    var dx = this.scene.player.x - this.x;
+    var dy = this.scene.player.y - this.y;
+
+    var angle = Math.atan2(dy, dx);
+
+    var speed = 50;
+    this.body.setVelocity(
+      Math.cos(angle) * speed,
+      Math.sin(angle) * speed
+    );
   }
 }

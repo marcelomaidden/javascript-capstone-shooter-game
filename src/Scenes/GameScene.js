@@ -90,10 +90,14 @@ export default class GameScene extends Phaser.Scene {
 
     this.zombieGroup = this.physics.add.group();
 
+    let randomPlace = [0, 300, 450, 420]; 
+
     this.time.addEvent({
       delay: 2000,
       callback: function() {
-        let zombie = new Zombie(this, 750, 100, 'zombie');
+        let random = Math.floor(Math.random() * (3 - 0));
+        let zombie = new Zombie(this, 750, 
+          randomPlace[random], 'zombie');
         this.physics.add.collider(zombie, this.platforms);
         this.zombieGroup.add(zombie);  
       },
