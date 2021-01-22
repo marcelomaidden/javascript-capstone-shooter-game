@@ -1,5 +1,6 @@
 /* global Phaser */
 import 'phaser';
+import Bullet from '../Attacks/Bullet';
 
 export default class Player extends Phaser.Physics.Arcade.Sprite  {
   
@@ -63,6 +64,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
     this.body.setSize(150, 250)
     this.scene = scene;
     this.addAnimation();
+    this.move = 'right';
   }
 
   update() {
@@ -72,16 +74,30 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
     {
         this.body.velocity.x = -360;
         this.anims.play('left', true);
+        this.move = 'left';
     }
     else if (this.scene.cursors.right.isDown)
     {
         this.body.velocity.x = 360;
         this.anims.play('right', true);
+        this.move = 'right'
     }
     else {
       this.body.velocity.x = 0;
+      if (this.move == 'left')
+      {
+        this.anims.play('turn', true);
+        this.flipX = true
+      }        
+      else if (this.move == 'right')
+      {
+        this.flipX = false
+      }        
+    }
 
-      this.anims.play('turn');
+    if (this.scene.keySpace.isDown) {
+      let bullet = new Bullet(this.scene, this.x, this.y, 'bullet');
+      bullet.update()
     }
 
     if (this.scene.cursors.up.isDown && this.body.touching.down){

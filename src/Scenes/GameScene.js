@@ -61,7 +61,57 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('zombie23', 'assets/characters/zombie/jared0196.png');
     this.load.image('zombie24', 'assets/characters/zombie/jared0197.png');
     this.load.image('zombie25', 'assets/characters/zombie/jared0198.png');
+  }
 
+  loadBullet() {
+    this.load.image('bullet0', 'assets/characters/hero/fire/bullet00.png');
+    this.load.image('bullet1', 'assets/characters/hero/fire/bullet01.png');
+    this.load.image('bullet2', 'assets/characters/hero/fire/bullet02.png');
+    this.load.image('bullet3', 'assets/characters/hero/fire/bullet03.png');
+    this.load.image('bullet4', 'assets/characters/hero/fire/bullet04.png');
+    this.load.image('bullet5', 'assets/characters/hero/fire/bullet05.png');
+    this.load.image('bullet6', 'assets/characters/hero/fire/bullet06.png');
+    this.load.image('bullet7', 'assets/characters/hero/fire/bullet07.png');
+    this.load.image('bullet8', 'assets/characters/hero/fire/bullet08.png');
+    this.load.image('bullet9', 'assets/characters/hero/fire/bullet09.png');
+    this.load.image('bullet10', 'assets/characters/hero/fire/bullet10.png');
+    this.load.image('bullet11', 'assets/characters/hero/fire/bullet11.png');
+    this.load.image('bullet12', 'assets/characters/hero/fire/bullet12.png');
+    this.load.image('bullet13', 'assets/characters/hero/fire/bullet13.png');
+    this.load.image('bullet14', 'assets/characters/hero/fire/bullet14.png');
+    this.load.image('bullet15', 'assets/characters/hero/fire/bullet15.png');
+    this.load.image('bullet16', 'assets/characters/hero/fire/bullet16.png');
+    this.load.image('bullet17', 'assets/characters/hero/fire/bullet17.png');
+    this.load.image('bullet18', 'assets/characters/hero/fire/bullet18.png');
+    this.load.image('bullet19', 'assets/characters/hero/fire/bullet19.png');
+    this.load.image('bullet20', 'assets/characters/hero/fire/bullet20.png');
+    this.load.image('bullet21', 'assets/characters/hero/fire/bullet21.png');
+    this.load.image('bullet22', 'assets/characters/hero/fire/bullet22.png');
+    this.load.image('bullet23', 'assets/characters/hero/fire/bullet23.png');
+    this.load.image('bullet24', 'assets/characters/hero/fire/bullet24.png');
+    this.load.image('bullet25', 'assets/characters/hero/fire/bullet25.png');
+    this.load.image('bullet26', 'assets/characters/hero/fire/bullet26.png');
+    this.load.image('bullet27', 'assets/characters/hero/fire/bullet27.png');
+    this.load.image('bullet28', 'assets/characters/hero/fire/bullet28.png');
+    this.load.image('bullet29', 'assets/characters/hero/fire/bullet29.png');
+    this.load.image('bullet30', 'assets/characters/hero/fire/bullet30.png');
+    this.load.image('bullet31', 'assets/characters/hero/fire/bullet31.png');
+    this.load.image('bullet32', 'assets/characters/hero/fire/bullet32.png');
+    this.load.image('bullet33', 'assets/characters/hero/fire/bullet33.png');
+    this.load.image('bullet34', 'assets/characters/hero/fire/bullet34.png');
+    this.load.image('bullet35', 'assets/characters/hero/fire/bullet35.png');
+    this.load.image('bullet36', 'assets/characters/hero/fire/bullet36.png');
+    this.load.image('bullet37', 'assets/characters/hero/fire/bullet37.png');
+    this.load.image('bullet38', 'assets/characters/hero/fire/bullet38.png');
+    this.load.image('bullet39', 'assets/characters/hero/fire/bullet39.png');
+    this.load.image('bullet40', 'assets/characters/hero/fire/bullet40.png');
+    this.load.image('bullet41', 'assets/characters/hero/fire/bullet41.png');
+    this.load.image('bullet42', 'assets/characters/hero/fire/bullet42.png');
+    this.load.image('bullet43', 'assets/characters/hero/fire/bullet43.png');
+    this.load.image('bullet44', 'assets/characters/hero/fire/bullet44.png');
+    this.load.image('bullet45', 'assets/characters/hero/fire/bullet45.png');
+    this.load.image('bullet46', 'assets/characters/hero/fire/bullet46.png');
+    this.load.image('bullet47', 'assets/characters/hero/fire/bullet47.png');
   }
 
   preload() {
@@ -70,6 +120,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('ground', 'assets/ui/blue_button02.png');
     this.loadHero();
     this.loadZombie();
+    this.loadBullet();
     this.width = this.cameras.main.width;
     this.height = this.cameras.main.height;
   }
@@ -87,11 +138,11 @@ export default class GameScene extends Phaser.Scene {
     this.platforms.create(750, 220, 'ground');
 
     this.physics.add.collider(this.player, this.platforms);    
+    this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     this.zombieGroup = this.physics.add.group();
-
     let randomPlace = [0, 300, 450, 420]; 
-
+    
     this.time.addEvent({
       delay: 6000,
       callback: function() {
