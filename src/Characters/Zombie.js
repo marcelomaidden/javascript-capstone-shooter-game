@@ -47,10 +47,12 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite  {
     this.body.bounce.x = 1;
     this.body.bounce.y = 1;
     this.body.setCollideWorldBounds(true);
-    this.body.setSize(250, 250)
+    this.body.setSize(150, 250)
     this.scene = scene;
     this.addAnimation();
     this.play('zombie_walk');
+    this.scene.physics.add.collider(this, this.scene.platforms);
+    this.scene.zombieGroup.add(this);  
   }
 
   update() {

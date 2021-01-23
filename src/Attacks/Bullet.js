@@ -74,9 +74,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
     this.scene = scene;
     this.addAnimation();
     this.play('bullet_attack');
-    this.scene.physics.add.collider(this, this.scene.zombieGroup, () => {
-      this.destroy()
-    })
+    this.scene.bulletGroup.add(this);
   }
 
   update() {

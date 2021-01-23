@@ -141,16 +141,22 @@ export default class GameScene extends Phaser.Scene {
     this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     this.zombieGroup = this.physics.add.group();
+    this.bulletGroup = this.physics.add.group();
+    this.physics.add.collider(this.bulletGroup, this.platforms, (bullet, platforms) => {
+      bullet.destroy()
+    })
+    this.physics.add.collider(this.bulletGroup, this.zombieGroup, (bullet, zombie) => {
+      bullet.destroy();
+      zombie.destroy();
+    })
     let randomPlace = [0, 300, 450, 420]; 
     
     this.time.addEvent({
-      delay: 6000,
+      delay: 1000,
       callback: function() {
         let random = Math.floor(Math.random() * (3 - 0));
-        let zombie = new Zombie(this, 750, 
+        new Zombie(this, 750, 
           randomPlace[random], 'zombie');
-        this.physics.add.collider(zombie, this.platforms);
-        this.zombieGroup.add(zombie);  
       },
       callbackScope: this,
       loop: true

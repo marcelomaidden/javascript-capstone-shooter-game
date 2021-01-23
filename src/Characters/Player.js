@@ -64,6 +64,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
     this.body.setSize(150, 250)
     this.scene = scene;
     this.addAnimation();
+    this.anims.play('right');
     this.move = 'right';
   }
 
@@ -96,8 +97,16 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
     }
 
     if (this.scene.keySpace.isDown) {
-      let bullet = new Bullet(this.scene, this.x, this.y, 'bullet');
-      bullet.update()
+      this.scene.time.addEvent({
+        delay: 500,
+        callback: function() {
+          console.log("called")
+          let bullet = new Bullet(this.scene, this.x, this.y, 'bullet');
+          bullet.update()
+        },
+        callbackScope: this,
+        loop: false
+      });
     }
 
     if (this.scene.cursors.up.isDown && this.body.touching.down){
