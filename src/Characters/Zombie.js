@@ -1,5 +1,6 @@
 /* global Phaser */
 import 'phaser';
+import Arm from '../Attacks/Arm';
 
 export default class Zombie extends Phaser.Physics.Arcade.Sprite  {
   addAnimation() {
@@ -53,6 +54,9 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite  {
     this.play('zombie_walk');
     this.scene.physics.add.collider(this, this.scene.platforms);
     this.scene.zombieGroup.add(this);  
+
+    this.fireRate = 9000;
+    this.nextFire = 0;
   }
 
   update() {
@@ -61,9 +65,15 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite  {
     var dx = this.scene.player.x - this.x;
     var dy = this.scene.player.y - this.y;
     if(dx <=0 )
+    {
+      this.move = 'left';
       this.flipX = false;
+    }
     else
+    {
+      this.move = 'right';
       this.flipX = true;
+    }     
     
     var angle = Math.atan2(dy, dx);
 
@@ -72,5 +82,18 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite  {
       Math.cos(angle) * speed,
       Math.sin(angle) * speed
     );
+
+    this.scene.time.addEvent({
+      delay: 3000,
+      callback: function() {
+        if(this.scene.time.now > this.nextFire){
+          this.nextFire = this.scene.time.now + this.fireRate;
+          let arm = new Arm(this.scene, this.x, this.y, 'arm', this);
+          arm.update();     
+        }          
+      },
+      callbackScope: this,
+      loop: false
+    });
   }
 }

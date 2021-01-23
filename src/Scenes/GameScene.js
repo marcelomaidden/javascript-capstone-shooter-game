@@ -61,6 +61,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('zombie23', 'assets/characters/zombie/jared0196.png');
     this.load.image('zombie24', 'assets/characters/zombie/jared0197.png');
     this.load.image('zombie25', 'assets/characters/zombie/jared0198.png');
+    this.load.image('arm', 'assets/characters/zombie/jared0199.png');
   }
 
   loadBullet() {
@@ -143,6 +144,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.zombieGroup = this.physics.add.group();
     this.bulletGroup = this.physics.add.group();
+    this.armGroup = this.physics.add.group();
 
     this.physics.add.collider(this.bulletGroup, this.zombieGroup, (bullet, zombie) => {
       bullet.destroy();

@@ -66,6 +66,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
     this.addAnimation();
     this.anims.play('right', true);
     this.move = 'right';
+
+    /* limit number of shots*/
+    this.fireRate = 1000;
+    this.nextFire = 0;
   }
 
   update() {
@@ -98,8 +102,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite  {
 
     if (this.scene.keySpace.isDown) {
       setTimeout(() => {
-        let bullet = new Bullet(this.scene, this.x, this.y, 'bullet');
-        bullet.update()      
+        /* limit shoot based on the next fire and current time*/
+        if(this.scene.time.now > this.nextFire){
+          this.nextFire = this.scene.time.now + this.fireRate;
+          let bullet = new Bullet(this.scene, this.x, this.y, 'bullet', this);
+          bullet.update()      
+        }
       }, 300);
     }
 
