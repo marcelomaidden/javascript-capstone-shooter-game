@@ -135,6 +135,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.platforms.create(600, 400, 'ground');
     this.platforms.create(50, 250, 'ground');
+    this.platforms.create(400, 350, 'ground');
     this.platforms.create(750, 220, 'ground');
 
     this.physics.add.collider(this.player, this.platforms);    
@@ -142,21 +143,22 @@ export default class GameScene extends Phaser.Scene {
 
     this.zombieGroup = this.physics.add.group();
     this.bulletGroup = this.physics.add.group();
-    this.physics.add.collider(this.bulletGroup, this.platforms, (bullet, platforms) => {
-      bullet.destroy()
-    })
+
     this.physics.add.collider(this.bulletGroup, this.zombieGroup, (bullet, zombie) => {
       bullet.destroy();
       zombie.destroy();
     })
-    let randomPlace = [0, 300, 450, 420]; 
-    
+
+    let randomYPlace = [0, 300, 450, 420]; 
+    let randomXPlace = [0, 750];
+    let randomX = 0
     this.time.addEvent({
-      delay: 1000,
+      delay: 3000,
       callback: function() {
-        let random = Math.floor(Math.random() * (3 - 0));
-        new Zombie(this, 750, 
-          randomPlace[random], 'zombie');
+        let randomY = Math.floor(Math.random() * (3 - 0));
+        randomX = randomX==0?1:0;
+        new Zombie(this, randomXPlace[randomX], 
+          randomYPlace[randomY], 'zombie');
       },
       callbackScope: this,
       loop: true
