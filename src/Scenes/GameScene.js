@@ -148,7 +148,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.bulletGroup, this.zombieGroup, (bullet, zombie) => {
       bullet.destroy();
-      zombie.destroy();
+      zombie.disableBody();
+      zombie.visible = false;
     })
 
     let randomYPlace = [0, 300, 450, 420]; 

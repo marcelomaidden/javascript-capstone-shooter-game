@@ -86,11 +86,13 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite  {
     this.scene.time.addEvent({
       delay: 3000,
       callback: function() {
-        if(this.scene.time.now > this.nextFire){
-          this.nextFire = this.scene.time.now + this.fireRate;
-          let arm = new Arm(this.scene, this.x, this.y, 'arm', this);
-          arm.update();     
-        }          
+        if(this !== undefined){
+          if(this.scene.time.now > this.nextFire){
+            this.nextFire = this.scene.time.now + this.fireRate;
+            let arm = new Arm(this.scene, this.x, this.y, 'arm', this);
+            arm.update();     
+          }          
+        }        
       },
       callbackScope: this,
       loop: false
