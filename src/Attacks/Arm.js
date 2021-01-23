@@ -15,10 +15,5 @@ export default class Arms extends Shoot  {
     this.setScale(0.7);
     this.scene.armGroup.add(this);
     this.character = character;
-
-    this.scene.physics.add.collider(this, this.scene.player, () => {
-      this.scene.start('CreditsScene');
-      this.destroy()
-    })
   } 
 }

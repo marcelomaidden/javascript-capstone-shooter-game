@@ -152,6 +152,10 @@ export default class GameScene extends Phaser.Scene {
       zombie.visible = false;
     })
 
+    this.physics.add.collider(this.armGroup, this.player, () => {
+      this.scene.start('CreditsScene');
+    })
+
     let randomYPlace = [0, 300, 450, 420]; 
     let randomXPlace = [0, 750];
     let randomX = 0
