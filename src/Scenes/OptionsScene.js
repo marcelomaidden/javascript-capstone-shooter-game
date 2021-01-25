@@ -7,6 +7,10 @@ export default class OptionsScene extends Phaser.Scene {
     super('Options');
   }
 
+  init({score}) {
+    this.score = score
+  }
+
   preload() 
   {
       this.load.image('block', 'assets/ui/block.png');
@@ -36,11 +40,11 @@ export default class OptionsScene extends Phaser.Scene {
   
       this.add.bitmapText(80, 260, 'arcade', 'RANK  SCORE   NAME').setTint(0xff00ff);
   
-      this.add.bitmapText(80, 310, 'arcade', '1ST   50000    ').setTint(0xff0000);
-      this.add.bitmapText(80, 360, 'arcade', '2ND   40000    ICE').setTint(0xff8200);
-      this.add.bitmapText(80, 410, 'arcade', '3RD   30000    GOS').setTint(0xffff00);
-      this.add.bitmapText(80, 460, 'arcade', '4TH   20000    HRE').setTint(0x00ff00);
-      this.add.bitmapText(80, 510, 'arcade', '5TH   10000    ETE').setTint(0x00bfff);
+      this.add.bitmapText(80, 310, 'arcade', `1ST   ${this.score}    `).setTint(0xff0000);
+    //   this.add.bitmapText(80, 360, 'arcade', '2ND   40000    ICE').setTint(0xff8200);
+    //   this.add.bitmapText(80, 410, 'arcade', '3RD   30000    GOS').setTint(0xffff00);
+    //   this.add.bitmapText(80, 460, 'arcade', '4TH   20000    HRE').setTint(0x00ff00);
+    //   this.add.bitmapText(80, 510, 'arcade', '5TH   10000    ETE').setTint(0x00bfff);
   
       let playerText = this.add.bitmapText(560, 310, 'arcade', name).setTint(0xff0000);
   

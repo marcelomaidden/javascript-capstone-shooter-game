@@ -146,7 +146,23 @@ export default class GameScene extends Phaser.Scene {
     this.bulletGroup = this.physics.add.group();
     this.armGroup = this.physics.add.group();
 
+    const zombiesKilledText = this.make.text({
+      x: this.width - 150,
+      y: 50,
+      text: 'Killed: 0',
+      style: {
+        font: '18px monospace',
+        fill: '#ffffff',
+      },
+    });
+
+    zombiesKilledText.setInteractive();
+
+    let zombiesKilled = 0
+
     this.physics.add.collider(this.bulletGroup, this.zombieGroup, (bullet, zombie) => {
+      zombiesKilled += 1;
+      zombiesKilledText.setText(`Killed: ${zombiesKilled}`);
       bullet.destroy();
       zombie.disableBody();
       zombie.visible = false;
@@ -154,12 +170,12 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.armGroup, this.player, () => {
       this.player.disableBody();
-      this.scene.start('Options');
+      this.scene.start('Options', {score: zombiesKilled});
     });
   
     this.physics.add.collider(this.zombieGroup, this.player, () => {
       this.player.disableBody();
-      this.scene.start('Options');
+      this.scene.start('Options', {score: zombiesKilled});
     })
 
     let randomYPlace = [0, 300, 450, 420]; 
