@@ -19,6 +19,16 @@ export default class OptionsScene extends Phaser.Scene {
       this.load.bitmapFont('arcade', 'assets/ui/arcade.png', 'assets/ui/arcade.xml');
   }
   
+  async scores(player) {
+    let leaderboard = await window.game.leaderboard.createScore(player, this.score);
+    let height = 360;
+    
+    leaderboard.forEach(({user, score}) => {
+        this.add.bitmapText(80, height, 'arcade', `1ST   ${score}       ${user}`).setTint(0xff0000);
+        height += 50;
+    });
+  }
+
   create ()
   {
       let chars = [
@@ -39,12 +49,7 @@ export default class OptionsScene extends Phaser.Scene {
       let block = this.add.image(input.x - 10, input.y - 2, 'block').setOrigin(0);
   
       this.add.bitmapText(80, 260, 'arcade', 'RANK  SCORE   NAME').setTint(0xff00ff);
-  
-      this.add.bitmapText(80, 310, 'arcade', `1ST   ${this.score}    `).setTint(0xff0000);
-    //   this.add.bitmapText(80, 360, 'arcade', '2ND   40000    ICE').setTint(0xff8200);
-    //   this.add.bitmapText(80, 410, 'arcade', '3RD   30000    GOS').setTint(0xffff00);
-    //   this.add.bitmapText(80, 460, 'arcade', '4TH   20000    HRE').setTint(0x00ff00);
-    //   this.add.bitmapText(80, 510, 'arcade', '5TH   10000    ETE').setTint(0x00bfff);
+      
   
       let playerText = this.add.bitmapText(560, 310, 'arcade', name).setTint(0xff0000);
   
@@ -91,8 +96,8 @@ export default class OptionsScene extends Phaser.Scene {
               //  Enter or Space
               if (cursor.x === 9 && cursor.y === 2 && name.length > 0)
               {
-                  //  Submit
-                  console.log('Submit to API')
+                  //  Submit to API
+                  this.scores(name);
               }
               else if (cursor.x === 8 && cursor.y === 2 && name.length > 0)
               {
