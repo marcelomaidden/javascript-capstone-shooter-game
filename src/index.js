@@ -1,7 +1,6 @@
 /* global Phaser */
 
 import LeaderBoard from './API/LeaderBoard';
-let leaderboard = new LeaderBoard('ZombiesOfProductivity');
 
 import 'phaser';
 import config from './Config/config';
@@ -25,6 +24,17 @@ class Game extends Phaser.Game {
   } 
 }
 
-window.game = new Game();
+let leaderboard = new LeaderBoard('ZombiesOfProductivity');
+let result = leaderboard.createGame();
+result.then(() => {
+  window.game = new Game();
 
-window.game.leaderboard = leaderboard;
+  window.game.leaderboard = leaderboard;
+}).catch((error) => {
+  document.write(`An error ocurred ${error}`)
+})
+
+
+
+
+
