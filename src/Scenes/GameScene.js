@@ -153,7 +153,13 @@ export default class GameScene extends Phaser.Scene {
     })
 
     this.physics.add.collider(this.armGroup, this.player, () => {
-      this.scene.start('CreditsScene');
+      this.player.disableBody();
+      this.scene.start('Options');
+    });
+  
+    this.physics.add.collider(this.zombieGroup, this.player, () => {
+      this.player.disableBody();
+      this.scene.start('Options');
     })
 
     let randomYPlace = [0, 300, 450, 420]; 

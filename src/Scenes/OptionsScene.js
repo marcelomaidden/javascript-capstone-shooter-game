@@ -8,8 +8,15 @@ export default class OptionsScene extends Phaser.Scene {
   }
 
   preload() {
+    this.width = this.cameras.main.width;
+    this.height = this.cameras.main.height;
   }
 
   create() {
+
+  }
+
+  update() {
+
   }
 }

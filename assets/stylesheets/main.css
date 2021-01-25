@@ -1,0 +1,13 @@
+.player_name {
+  position: absolute;
+  border-radius: 10px;
+  width: 50%;
+  height: 30px;
+  left: 30px;
+  top: 100px;
+  display: none;
+}
+
+.show {
+  display: block;
+}
