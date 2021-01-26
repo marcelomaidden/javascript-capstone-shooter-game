@@ -1,1 +1,1 @@
-web: npx webpack-dev-server --port=8000
+web: npx webpack-dev-server --port $PORT --host 0.0.0.0 
