@@ -7,7 +7,7 @@
 [![GitHub2 Pull Requests](https://img.shields.io/badge/GitHub-Pull%20Requests-blue)](https://github.com/marcelomaidden/javascript-capstone-shooter-game/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 </div>
-<p align="center">Shooter Game is a game that uses Phaser library to manipulate the player and enemies' movements and shoots. We can create different scenes, obstacles and logic for our enemies. This project uses Async, await to make calls to the LeaderBoard API, where name and scores are kept. I used Javascript, LeaderBoard API, Phaser 3.</p>
+<p align="center">Shooter Game is a game that uses Phaser library to manipulate the player and enemies' movements and shoots. We can create different scenes, obstacles and logic for our enemies. This project uses Async, await to make calls to the LeaderBoard API, where name and scores are kept. I used Javascript, LeaderBoard API, Phaser 3, and Jest.</p>
 
 <p align="center">My expectations for this project</p>
 
@@ -26,6 +26,7 @@
 - Phaser 3 
 - JavaScript
 - LeaderBoard API
+- Jest
 
 
 ## Getting Started
@@ -57,6 +58,10 @@ To make any change,
   - Run in your terminal `npm run start` to start the game
   - Go to your preferred browser and open `localhost:8000`
   - Click the `Play` button and have fun
+
+## Integration tests
+
+  - In order to test the code run in your terminal `npm run test`
 
 ## Game Controls
 
@@ -99,6 +104,7 @@ Give a ⭐️ if you like this project!
 
 - Phaser 3 
 - JavaScript
+- Jest
 - LeaderBoard API
 - Kristaps Ungurs (background image)
 - Unsplash
