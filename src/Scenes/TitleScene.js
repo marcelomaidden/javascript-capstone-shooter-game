@@ -17,7 +17,7 @@ export default class TitleScene extends Phaser.Scene {
     const assetText = this.make.text({
       x: this.width / 2,
       y: this.height / 2 + 50,
-      text: 'Kill zombies of productivity',
+      text: 'Kill the zombies - Shooter game',
       style: {
         font: '18px monospace',
         fill: '#ffffff',

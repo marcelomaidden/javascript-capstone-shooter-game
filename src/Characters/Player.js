@@ -74,11 +74,11 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     this.body.velocity.y = 0;
 
-    if (this.scene.cursors.left.isDown) {
+    if (this.scene.cursors.left.isDown || this.scene.keyA.isDown) {
       this.body.velocity.x = -360;
       this.anims.play('left', true);
       this.move = 'left';
-    } else if (this.scene.cursors.right.isDown) {
+    } else if (this.scene.cursors.right.isDown || this.scene.keyD.isDown) {
       this.body.velocity.x = 360;
       this.anims.play('right', true);
       this.move = 'right';
@@ -101,7 +101,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       }
     }
 
-    if (this.scene.cursors.up.isDown && this.body.touching.down) {
+    if ((this.scene.cursors.up.isDown || this.scene.keyW.isDown) && this.body.touching.down) {
       setTimeout(() => {
         this.body.velocity.y = -1000;
       }, 260);

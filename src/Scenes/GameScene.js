@@ -140,6 +140,9 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player, this.platforms);
     this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
     this.zombieGroup = this.physics.add.group();
     this.bulletGroup = this.physics.add.group();
