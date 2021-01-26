@@ -16,7 +16,7 @@ export default class LeaderBoard {
           result.forEach(({ user, score }) => {
             arrayScores.push({ user, score });
           });
-          const sortedArray = arrayScores.sort((a, b) => a.score + b.score);
+          const sortedArray = arrayScores.sort((a, b) =>  b.score + a.score);
           resolve(sortedArray);
         });
     });
