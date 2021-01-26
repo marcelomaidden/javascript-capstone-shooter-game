@@ -1,1 +1,1 @@
-web: npm run start
+web: npx webpack-dev-server --port=80
