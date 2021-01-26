@@ -7,7 +7,7 @@
 [![GitHub2 Pull Requests](https://img.shields.io/badge/GitHub-Pull%20Requests-blue)](https://github.com/marcelomaidden/javascript-capstone-shooter-game/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 </div>
-<p align="center">Shooter Game is a game that uses Phaser library to manipulate players, enemies and scenes. This project uses Async, await to make calls to the LeaderBoard API, where name and scores are kept. I used Javascript, LeaderBoard API, Phaser 3.</p>
+<p align="center">Shooter Game is a game that uses Phaser library to manipulate the player and enemies' movements and shoots. We can create different scenes, obstacles and logic for our enemies. This project uses Async, await to make calls to the LeaderBoard API, where name and scores are kept. I used Javascript, LeaderBoard API, Phaser 3.</p>
 
 ## App Screenshot
 ![screenshot](./screenshot.png)
@@ -39,14 +39,32 @@ To get a local copy up and running follow these simple example steps.
 - Change directory to folder to download repository
 - Use `cd <file-path>`
 - Run `git clone https://github.com/marcelomaidden/javascript-capstone-shooter-game`
+- Install [Node.js](https://nodejs.org/en/download/)
 
 To make any change,
 
 - Open related file by using text editor.
 
-## Usage
+## How to run your project locally
 
-  
+  - Change directory to javascript-capstone-shooter-game `cd javascript-capstone-shooter-game`
+  - Install all project dependencies `npm install`
+  - Run in your terminal `npm run start` to start the game
+  - Go to your preferred browser and open `localhost:8000`
+  - Click the `Play` button and have fun
+
+## Game Controls
+
+  - Player can move sidewards (right, left) by using the keys below:
+  - `Left cursor key or A key to move to the left side`
+  - `Right cursor key or D key to move to the right side`
+  - `Up cursor key or W key to jump`
+  - Space key is used to shoot towards the zombies
+
+## Game story
+
+  This game has only one scene where the player can move sidewards and jump.
+  Zombies appear at random locations and throw their arms to defeat the player, so the player should always be moving and scape from them. You should kill as many zombies as possible because a score is kept for the ones who killed more zombies.  
 
 ## Author
 
@@ -74,10 +92,13 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Bulma
-- W3Schools
-- Font Awesome
-- Javascript
+- Phaser 3 
+- JavaScript
+- LeaderBoard API
+- Kristaps Ungurs (background image)
+- Unsplash
+- Jorge Avila (Hero and zombie sprites)
+- OpenGameArt
 
 ## 📝 License
 
