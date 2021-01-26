@@ -185,8 +185,9 @@ export default class GameScene extends Phaser.Scene {
       callback() {
         const randomY = Math.floor(Math.random() * (3 - 0));
         randomX = randomX === 0 ? 1 : 0;
-        return new Zombie(this, randomXPlace[randomX],
+        const zombie = new Zombie(this, randomXPlace[randomX],
           randomYPlace[randomY], 'zombie');
+        zombie.update();
       },
       callbackScope: this,
       loop: true,
@@ -195,8 +196,5 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     this.player.update();
-    for (const zombie of this.zombieGroup.getChildren()) {
-      zombie.update();
-    }
   }
 }

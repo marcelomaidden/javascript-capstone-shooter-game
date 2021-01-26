@@ -38,8 +38,7 @@ export default class OptionsScene extends Phaser.Scene {
     this.centerButtonText(this.gameText, this.gameButton);
 
     this.gameButton.on('pointerdown', () => {
-      if (this.name.length > 0)
-        this.scene.start('Game');
+      if (this.name.length > 0) this.scene.start('Game');
     });
 
     this.endGameText = this.add.text(0, 0, 'End game', { fontSize: '32px', fill: '#fff' });

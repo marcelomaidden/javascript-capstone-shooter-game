@@ -16,7 +16,7 @@ export default class LeaderBoard {
           result.forEach(({ user, score }) => {
             arrayScores.push({ user, score });
           });
-          const sortedArray = arrayScores.sort((a, b) =>  b.score + a.score);
+          const sortedArray = arrayScores.sort((a, b) => b.score + a.score);
           resolve(sortedArray);
         });
     });
@@ -54,7 +54,9 @@ export default class LeaderBoard {
           body: JSONName,
         }).then((gameJSON) => gameJSON.json())
         .then(({ result }) => {
-          this.gameId = result.split(': ')[1].split(' ')[0];
+          const arraySplit = result.split(': ')[1];
+          const [gameId] = arraySplit.split(' ');
+          this.gameId = gameId;
           resolve(this.gameId);
         })
         .catch((error) => {
