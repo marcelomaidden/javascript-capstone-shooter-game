@@ -2,28 +2,28 @@ import Bullet from './Bullet';
 
 const mockBullet = jest.fn();
 const mockAnimation = jest.fn();
+let bullet = null;
 
-jest.mock('./Bullet', () => {
-  return jest.fn().mockImplementation(() => {
-    return {
-      update: mockBullet, 
-      animation: mockAnimation
-    }
-  })
-})
+jest.mock('./Bullet', () => jest.fn().mockImplementation(() => ({
+  update: mockBullet,
+  animation: mockAnimation,
+})));
 
 describe('Bullet class tests', () => {
+  beforeEach(() => {
+    bullet = new Bullet('scene', 'x', 'y', 'texture', 'character');
+  });
   it('Create a Bullet object', () => {
-    let bullet = new Bullet("scene", "x", "y", "texture", "character");
-
     expect(Bullet).toHaveBeenCalledTimes(1);
   });
 
   it('Updates Bullet object', () => {
-    expect(Bullet).toHaveBeenCalledTimes(1);
+    bullet.update();
+    expect(Bullet).toHaveBeenCalledTimes(2);
   });
 
   it('Animates Bullet object', () => {
-    expect(Bullet).toHaveBeenCalledTimes(1);
+    bullet.animation();
+    expect(Bullet).toHaveBeenCalledTimes(3);
   });
-})
+});

@@ -3,22 +3,18 @@ import GameScene from './GameScene';
 const mockGameScene = jest.fn();
 let gameScene = null;
 
-jest.mock('./GameScene', () => {
-  return jest.fn().mockImplementation(() => {
-    return {
-      update: mockGameScene, 
-      animation: mockGameScene,
-      loadZombie: mockGameScene,
-      loadHero: mockGameScene,
-      loadBullet: mockGameScene,
-    }
-  })
-})
+jest.mock('./GameScene', () => jest.fn().mockImplementation(() => ({
+  update: mockGameScene,
+  animation: mockGameScene,
+  loadZombie: mockGameScene,
+  loadHero: mockGameScene,
+  loadBullet: mockGameScene,
+})));
 
 describe('GameScene class tests', () => {
   beforeEach(() => {
-    gameScene = new GameScene("scene", "x", "y", "texture", "character");
-  })
+    gameScene = new GameScene('scene', 'x', 'y', 'texture', 'character');
+  });
   it('Create a GameScene object', () => {
     expect(GameScene).toHaveBeenCalled();
   });
@@ -47,4 +43,4 @@ describe('GameScene class tests', () => {
     gameScene.loadZombie();
     expect(GameScene).toHaveBeenCalledTimes(6);
   });
-})
+});
