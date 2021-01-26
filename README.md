@@ -19,7 +19,7 @@
 
 ## Live Link Demo
 
-[Live Link Demo](https://marcelomaidden.github.io/javascript-capstone-shooter-game/)
+[Live Link Demo](https://fast-crag-38738.herokuapp.com/)
 
 ## Built With
 
