@@ -21,20 +21,15 @@ class Game extends Phaser.Game {
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Game', GameScene);
     this.scene.start('Boot');
-  } 
+  }
 }
 
-let leaderboard = new LeaderBoard('ZombiesOfProductivity');
-let result = leaderboard.createGame();
+const leaderboard = new LeaderBoard('ZombiesOfProductivity');
+const result = leaderboard.createGame();
 result.then(() => {
   window.game = new Game();
 
   window.game.leaderboard = leaderboard;
 }).catch((error) => {
-  document.write(`An error ocurred ${error}`)
-})
-
-
-
-
-
+  document.write(`An error ocurred ${error}`);
+});

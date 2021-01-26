@@ -9,37 +9,36 @@ export default class GameScene extends Phaser.Scene {
   }
 
   loadHero() {
-    /*right movement images hero*/
+    /* right movement images hero */
     this.load.image('hero1', 'assets/characters/hero/jared0055.png');
     this.load.image('hero2', 'assets/characters/hero/jared0056.png');
     this.load.image('hero3', 'assets/characters/hero/jared0057.png');
-    this.load.image('hero4', 'assets/characters/hero/jared0058.png');    
+    this.load.image('hero4', 'assets/characters/hero/jared0058.png');
     this.load.image('hero5', 'assets/characters/hero/jared0059.png');
     this.load.image('hero6', 'assets/characters/hero/jared0060.png');
     this.load.image('hero7', 'assets/characters/hero/jared0061.png');
     this.load.image('hero8', 'assets/characters/hero/jared0062.png');
     this.load.image('hero9', 'assets/characters/hero/jared0063.png');
     this.load.image('hero10', 'assets/characters/hero/jared0064.png');
-    /*left movement images hero*/
+    /* left movement images hero */
     this.load.image('hero11', 'assets/characters/hero/jared0087.png');
     this.load.image('hero12', 'assets/characters/hero/jared0088.png');
     this.load.image('hero13', 'assets/characters/hero/jared0089.png');
-    this.load.image('hero14', 'assets/characters/hero/jared0090.png');    
+    this.load.image('hero14', 'assets/characters/hero/jared0090.png');
     this.load.image('hero15', 'assets/characters/hero/jared0091.png');
     this.load.image('hero16', 'assets/characters/hero/jared0092.png');
     this.load.image('hero17', 'assets/characters/hero/jared0093.png');
     this.load.image('hero18', 'assets/characters/hero/jared0094.png');
     this.load.image('hero19', 'assets/characters/hero/jared0095.png');
     this.load.image('hero20', 'assets/characters/hero/jared0096.png');
-
   }
 
   loadZombie() {
-    /*right movement images hero*/
+    /* right movement images hero */
     this.load.image('zombie1', 'assets/characters/zombie/jared0174.png');
     this.load.image('zombie2', 'assets/characters/zombie/jared0175.png');
     this.load.image('zombie3', 'assets/characters/zombie/jared0176.png');
-    this.load.image('zombie4', 'assets/characters/zombie/jared0177.png');    
+    this.load.image('zombie4', 'assets/characters/zombie/jared0177.png');
     this.load.image('zombie5', 'assets/characters/zombie/jared0178.png');
     this.load.image('zombie6', 'assets/characters/zombie/jared0179.png');
     this.load.image('zombie7', 'assets/characters/zombie/jared0180.png');
@@ -49,7 +48,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('zombie11', 'assets/characters/zombie/jared0184.png');
     this.load.image('zombie12', 'assets/characters/zombie/jared0185.png');
     this.load.image('zombie13', 'assets/characters/zombie/jared0186.png');
-    this.load.image('zombie14', 'assets/characters/zombie/jared0187.png');    
+    this.load.image('zombie14', 'assets/characters/zombie/jared0187.png');
     this.load.image('zombie15', 'assets/characters/zombie/jared0188.png');
     this.load.image('zombie16', 'assets/characters/zombie/jared0189.png');
     this.load.image('zombie17', 'assets/characters/zombie/jared0190.png');
@@ -126,8 +125,8 @@ export default class GameScene extends Phaser.Scene {
     this.height = this.cameras.main.height;
   }
 
-  create() {    
-    const bg = this.add.image(400, 0, 'background');
+  create() {
+    this.add.image(400, 0, 'background');
     this.player = new Player(this, 0, 100, 'hero');
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -139,7 +138,7 @@ export default class GameScene extends Phaser.Scene {
     this.platforms.create(400, 350, 'ground');
     this.platforms.create(750, 220, 'ground');
 
-    this.physics.add.collider(this.player, this.platforms);    
+    this.physics.add.collider(this.player, this.platforms);
     this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     this.zombieGroup = this.physics.add.group();
@@ -158,7 +157,7 @@ export default class GameScene extends Phaser.Scene {
 
     zombiesKilledText.setInteractive();
 
-    let zombiesKilled = 0
+    let zombiesKilled = 0;
 
     this.physics.add.collider(this.bulletGroup, this.zombieGroup, (bullet, zombie) => {
       zombiesKilled += 1;
@@ -166,38 +165,37 @@ export default class GameScene extends Phaser.Scene {
       bullet.destroy();
       zombie.disableBody();
       zombie.visible = false;
-    })
+    });
 
     this.physics.add.collider(this.armGroup, this.player, () => {
       this.player.disableBody();
-      this.scene.start('Options', {score: zombiesKilled});
+      this.scene.start('Options', { score: zombiesKilled });
     });
-  
+
     this.physics.add.collider(this.zombieGroup, this.player, () => {
       this.player.disableBody();
-      this.scene.start('Options', {score: zombiesKilled});
-    })
+      this.scene.start('Options', { score: zombiesKilled });
+    });
 
-    let randomYPlace = [0, 300, 450, 420]; 
-    let randomXPlace = [0, 750];
-    let randomX = 0
+    const randomYPlace = [0, 300, 450, 420];
+    const randomXPlace = [0, 750];
+    let randomX = 0;
     this.time.addEvent({
       delay: 3000,
-      callback: function() {
-        let randomY = Math.floor(Math.random() * (3 - 0));
-        randomX = randomX==0?1:0;
-        new Zombie(this, randomXPlace[randomX], 
+      callback() {
+        const randomY = Math.floor(Math.random() * (3 - 0));
+        randomX = randomX === 0 ? 1 : 0;
+        return new Zombie(this, randomXPlace[randomX],
           randomYPlace[randomY], 'zombie');
       },
       callbackScope: this,
-      loop: true
+      loop: true,
     });
   }
 
-  update ()
-  {
+  update() {
     this.player.update();
-    for(let zombie of this.zombieGroup.getChildren()) {
+    for (const zombie of this.zombieGroup.getChildren()) {
       zombie.update();
     }
   }

@@ -7,26 +7,25 @@ export default class OptionsScene extends Phaser.Scene {
     super('Options');
   }
 
-  init({score}) {
-    this.score = score
+  init({ score }) {
+    this.score = score;
   }
 
-  preload() 
-  {
-      this.load.image('block', 'assets/ui/block.png');
-      this.load.image('rub', 'assets/ui/rub.png');
-      this.load.image('end', 'assets/ui/end.png');
-      this.load.bitmapFont('arcade', 'assets/ui/arcade.png', 'assets/ui/arcade.xml');
+  preload() {
+    this.load.image('block', 'assets/ui/block.png');
+    this.load.image('rub', 'assets/ui/rub.png');
+    this.load.image('end', 'assets/ui/end.png');
+    this.load.bitmapFont('arcade', 'assets/ui/arcade.png', 'assets/ui/arcade.xml');
   }
-  
+
   async scores() {
-    let height = 360;
-    let leaderboard = await window.game.leaderboard.createScore(this.name, this.score);
-    let count = 1;
-    leaderboard.forEach(({user, score}) => {
-        this.add.bitmapText(80, height, 'arcade', `${count}º     ${score}       ${user}`).setTint(0xff0000);
-        height += 50;
-        count += 1;
+    this.height = 360;
+    const leaderboard = await window.game.leaderboard.createScore(this.name, this.score);
+    this.count = 1;
+    leaderboard.forEach(({ user, score }) => {
+      this.add.bitmapText(80, this.height, 'arcade', `${this.count}º     ${score}       ${user}`).setTint(0xff0000);
+      this.height += 50;
+      this.count += 1;
     });
   }
 
@@ -39,19 +38,17 @@ export default class OptionsScene extends Phaser.Scene {
     this.centerButtonText(this.gameText, this.gameButton);
 
     this.gameButton.on('pointerdown', () => {
-      if(this.name.length > 0)
-      {
+      if (this.name.length > 0) {
         this.scores();
         this.scene.start('Game');
-      }        
+      }
     });
 
     this.endGameText = this.add.text(0, 0, 'End game', { fontSize: '32px', fill: '#fff' });
     this.centerButtonText(this.endGameText, this.endButton);
 
     this.endButton.on('pointerdown', () => {
-        if(this.name.length > 0)
-          this.scene.start('Credits');
+      if (this.name.length > 0) this.scene.start('Credits');
     });
 
     this.endButton.on('pointerover', () => {
@@ -71,94 +68,73 @@ export default class OptionsScene extends Phaser.Scene {
     });
   }
 
-  create ()
-  {
-      let chars = [
-          [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ],
-          [ 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' ],
-          [ 'U', 'V', 'W', 'X', 'Y', 'Z', '.', '-', '<', '>' ]
-      ];
-      let cursor = { x: 0, y: 0 };
-      this.name = '';
-  
-      let input = this.add.bitmapText(130, 50, 'arcade', 'ABCDEFGHIJ\n\nKLMNOPQRST\n\nUVWXYZ.-').setLetterSpacing(20);
-  
-      input.setInteractive();
-  
-      this.add.image(input.x + 430, input.y + 148, 'rub');
-      this.add.image(input.x + 482, input.y + 148, 'end');
-  
-      let block = this.add.image(input.x - 10, input.y - 2, 'block').setOrigin(0);
-  
-      this.add.bitmapText(80, 270, 'arcade', 'RANK  SCORE   NAME').setTint(0xff00ff);
-      
-      let playerText = this.add.bitmapText(560, 310, 'arcade', this.name).setTint(0xff0000);
-  
-      this.input.keyboard.on('keyup', (event) => {
-  
-          if (event.keyCode === 37 || event.keyCode == 65)
-          {
-              //  left or key a
-              if (cursor.x > 0)
-              {
-                  cursor.x--;
-                  block.x -= 52;
-              }
-          }
-          else if (event.keyCode === 39  || event.keyCode == 68)
-          {
-              //  right or key d
-              if (cursor.x < 9)
-              {
-                  cursor.x++;
-                  block.x += 52;
-              }
-          }
-          else if (event.keyCode === 38  || event.keyCode == 87)
-          {
-              //  up or key w
-              if (cursor.y > 0)
-              {
-                  cursor.y--;
-                  block.y -= 64;
-              }
-          }
-          else if (event.keyCode === 40  || event.keyCode == 83)
-          {
-              //  down or key 83
-              if (cursor.y < 2)
-              {
-                  cursor.y++;
-                  block.y += 64;
-              }
-          }
-          else if (event.keyCode === 13 || event.keyCode === 32)
-          {
-              //  Enter or Space
-              if (cursor.x === 9 && cursor.y === 2 && this.name.length > 0)
-              {
-                  //  Submit to API
-                  this.scores();
-              }
-              else if (cursor.x === 8 && cursor.y === 2 && this.name.length > 0)
-              {
-                  //  Rub
-                  this.name = this.name.substr(0, this.name.length - 1);
-  
-                  playerText.text = this.name;
-              }
-              else if (this.name.length < 3)
-              {
-                  //  Add
-                  this.name = this.name.concat(chars[cursor.y][cursor.x]);
-  
-                  playerText.text = this.name;
-              }
-          }
-  
-      });  
+  create() {
+    const chars = [
+      ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
+      ['K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
+      ['U', 'V', 'W', 'X', 'Y', 'Z', '.', '-', '<', '>'],
+    ];
+    const cursor = { x: 0, y: 0 };
+    this.name = '';
 
-      this.showButtons();
+    const input = this.add.bitmapText(130, 50, 'arcade', 'ABCDEFGHIJ\n\nKLMNOPQRST\n\nUVWXYZ.-').setLetterSpacing(20);
+
+    input.setInteractive();
+
+    this.add.image(input.x + 430, input.y + 148, 'rub');
+    this.add.image(input.x + 482, input.y + 148, 'end');
+
+    const block = this.add.image(input.x - 10, input.y - 2, 'block').setOrigin(0);
+
+    this.add.bitmapText(80, 270, 'arcade', 'RANK  SCORE   NAME').setTint(0xff00ff);
+
+    const playerText = this.add.bitmapText(560, 310, 'arcade', this.name).setTint(0xff0000);
+
+    this.input.keyboard.on('keyup', (event) => {
+      if (event.keyCode === 37 || event.keyCode === 65) {
+        //  left or key a
+        if (cursor.x > 0) {
+          cursor.x -= 1;
+          block.x -= 52;
+        }
+      } else if (event.keyCode === 39 || event.keyCode === 68) {
+        //  right or key d
+        if (cursor.x < 9) {
+          cursor.x += 1;
+          block.x += 52;
+        }
+      } else if (event.keyCode === 38 || event.keyCode === 87) {
+        //  up or key w
+        if (cursor.y > 0) {
+          cursor.y -= 1;
+          block.y -= 64;
+        }
+      } else if (event.keyCode === 40 || event.keyCode === 83) {
+        //  down or key 83
+        if (cursor.y < 2) {
+          cursor.y += 1;
+          block.y += 64;
+        }
+      } else if (event.keyCode === 13 || event.keyCode === 32) {
+        //  Enter or Space
+        if (cursor.x === 9 && cursor.y === 2 && this.name.length > 0) {
+          //  Submit to API
+          this.scores();
+        } else if (cursor.x === 8 && cursor.y === 2 && this.name.length > 0) {
+          //  Rub
+          this.name = this.name.substr(0, this.name.length - 1);
+
+          playerText.text = this.name;
+        } else if (this.name.length < 3) {
+          //  Add
+          this.name = this.name.concat(chars[cursor.y][cursor.x]);
+
+          playerText.text = this.name;
+        }
+      }
+    });
+
+    this.showButtons();
   }
 
   centerButtonText(gameText, gameButton) {

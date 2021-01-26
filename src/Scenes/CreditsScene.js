@@ -13,7 +13,7 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   create() {
-    const credits = this.make.text({
+    this.make.text({
       x: 50,
       y: 50,
       text: 'Credits',
@@ -23,7 +23,7 @@ export default class CreditsScene extends Phaser.Scene {
       },
     });
 
-    const unsplash = this.make.text({
+    this.make.text({
       x: 50,
       y: 100,
       text: 'Unsplash: ',
@@ -33,7 +33,7 @@ export default class CreditsScene extends Phaser.Scene {
       },
     });
 
-    const logo = this.make.text({
+    this.make.text({
       x: 100,
       y: 120,
       text: 'Logo: Kristaps Ungurs',
@@ -42,8 +42,8 @@ export default class CreditsScene extends Phaser.Scene {
         fill: '#ffffff',
       },
     });
-    
-    const fire = this.make.text({
+
+    this.make.text({
       x: 100,
       y: 150,
       text: 'Fire: reivaxcorp',
@@ -53,7 +53,7 @@ export default class CreditsScene extends Phaser.Scene {
       },
     });
 
-    const openGameArt = this.make.text({
+    this.make.text({
       x: 50,
       y: 180,
       text: 'OpenGameArt:',
@@ -61,9 +61,9 @@ export default class CreditsScene extends Phaser.Scene {
         font: '20px monospace',
         fill: '#ffffff',
       },
-    }); 
+    });
 
-    const heroAndZombies = this.make.text({
+    this.make.text({
       x: 100,
       y: 210,
       text: 'Hero and zombies sprites: Jorge Avila',
@@ -71,6 +71,6 @@ export default class CreditsScene extends Phaser.Scene {
         font: '20px monospace',
         fill: '#ffffff',
       },
-    }); 
+    });
   }
 }
