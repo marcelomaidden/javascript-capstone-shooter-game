@@ -22,12 +22,12 @@ export default class OptionsScene extends Phaser.Scene {
   async scores() {
     let height = 360;
     let leaderboard = await window.game.leaderboard.createScore(this.name, this.score);
-
+    let count = 1;
     leaderboard.forEach(({user, score}) => {
-        this.add.bitmapText(80, height, 'arcade', `1ST   ${score}       ${user}`).setTint(0xff0000);
+        this.add.bitmapText(80, height, 'arcade', `${count}º     ${score}       ${user}`).setTint(0xff0000);
         height += 50;
+        count += 1;
     });
-
   }
 
   showButtons() {

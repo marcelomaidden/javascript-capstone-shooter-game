@@ -16,7 +16,10 @@ export default class LeaderBoard{
         result.forEach(({user, score}) => {
           arrayScores.push({user, score});
         })
-        resolve(arrayScores)
+        let sortedArray = arrayScores.sort((a, b) => {
+          return a.score + b.score;
+        });
+        resolve(sortedArray)
       })
     })
   }
