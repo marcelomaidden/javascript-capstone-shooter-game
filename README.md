@@ -9,6 +9,11 @@
 </div>
 <p align="center">Shooter Game is a game that uses Phaser library to manipulate the player and enemies' movements and shoots. We can create different scenes, obstacles and logic for our enemies. This project uses Async, await to make calls to the LeaderBoard API, where name and scores are kept. I used Javascript, LeaderBoard API, Phaser 3.</p>
 
+<p align="center">My expectations for this project</p>
+
+  The main idea when I started the project was to create a game where the player could defeat zombies. These zombies should chase the player and throw parts of their bodies towards the player to kill him. The player and zombies should have basic movements and not be static images.
+  I wanted it to have more scenes, so the player who killed more zombies could pass to another scene, though it wasn't possible because of the deadline to deliver the project and I let this to the next releases.
+
 ## App Screenshot
 ![screenshot](./screenshot.png)
 
