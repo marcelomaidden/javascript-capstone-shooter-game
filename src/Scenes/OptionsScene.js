@@ -19,13 +19,55 @@ export default class OptionsScene extends Phaser.Scene {
       this.load.bitmapFont('arcade', 'assets/ui/arcade.png', 'assets/ui/arcade.xml');
   }
   
-  async scores(player) {
-    let leaderboard = await window.game.leaderboard.createScore(player, this.score);
+  async scores() {
     let height = 360;
-    
+    let leaderboard = await window.game.leaderboard.createScore(this.name, this.score);
+
     leaderboard.forEach(({user, score}) => {
         this.add.bitmapText(80, height, 'arcade', `1ST   ${score}       ${user}`).setTint(0xff0000);
         height += 50;
+    });
+
+  }
+
+  showButtons() {
+    this.gameButton = this.add.sprite(200, 250, 'blueButton1').setInteractive();
+
+    this.endButton = this.add.sprite(400, 250, 'blueButton1').setInteractive();
+
+    this.gameText = this.add.text(0, 0, 'Play again', { fontSize: '32px', fill: '#fff' });
+    this.centerButtonText(this.gameText, this.gameButton);
+
+    this.gameButton.on('pointerdown', () => {
+      if(this.name.length > 0)
+      {
+        this.scores();
+        this.scene.start('Game');
+      }        
+    });
+
+    this.endGameText = this.add.text(0, 0, 'End game', { fontSize: '32px', fill: '#fff' });
+    this.centerButtonText(this.endGameText, this.endButton);
+
+    this.endButton.on('pointerdown', () => {
+        if(this.name.length > 0)
+          this.scene.start('Credits');
+    });
+
+    this.endButton.on('pointerover', () => {
+      this.endButton.setTexture('blueButton2');
+    });
+
+    this.endButton.on('pointerout', () => {
+      this.endButton.setTexture('blueButton1');
+    });
+
+    this.gameButton.on('pointerover', () => {
+      this.gameButton.setTexture('blueButton2');
+    });
+
+    this.gameButton.on('pointerout', () => {
+      this.gameButton.setTexture('blueButton1');
     });
   }
 
@@ -37,7 +79,7 @@ export default class OptionsScene extends Phaser.Scene {
           [ 'U', 'V', 'W', 'X', 'Y', 'Z', '.', '-', '<', '>' ]
       ];
       let cursor = { x: 0, y: 0 };
-      let name = '';
+      this.name = '';
   
       let input = this.add.bitmapText(130, 50, 'arcade', 'ABCDEFGHIJ\n\nKLMNOPQRST\n\nUVWXYZ.-').setLetterSpacing(20);
   
@@ -50,7 +92,7 @@ export default class OptionsScene extends Phaser.Scene {
   
       this.add.bitmapText(80, 270, 'arcade', 'RANK  SCORE   NAME').setTint(0xff00ff);
       
-      let playerText = this.add.bitmapText(560, 310, 'arcade', name).setTint(0xff0000);
+      let playerText = this.add.bitmapText(560, 310, 'arcade', this.name).setTint(0xff0000);
   
       this.input.keyboard.on('keyup', (event) => {
   
@@ -93,62 +135,30 @@ export default class OptionsScene extends Phaser.Scene {
           else if (event.keyCode === 13 || event.keyCode === 32)
           {
               //  Enter or Space
-              if (cursor.x === 9 && cursor.y === 2 && name.length > 0)
+              if (cursor.x === 9 && cursor.y === 2 && this.name.length > 0)
               {
                   //  Submit to API
-                  this.scores(name);
+                  this.scores();
               }
-              else if (cursor.x === 8 && cursor.y === 2 && name.length > 0)
+              else if (cursor.x === 8 && cursor.y === 2 && this.name.length > 0)
               {
                   //  Rub
-                  name = name.substr(0, name.length - 1);
+                  this.name = this.name.substr(0, this.name.length - 1);
   
-                  playerText.text = name;
+                  playerText.text = this.name;
               }
-              else if (name.length < 3)
+              else if (this.name.length < 3)
               {
                   //  Add
-                  name = name.concat(chars[cursor.y][cursor.x]);
+                  this.name = this.name.concat(chars[cursor.y][cursor.x]);
   
-                  playerText.text = name;
+                  playerText.text = this.name;
               }
           }
   
       });  
 
-      this.gameButton = this.add.sprite(200, 250, 'blueButton1').setInteractive();
-
-      this.endButton = this.add.sprite(400, 250, 'blueButton1').setInteractive();
-  
-      this.gameText = this.add.text(0, 0, 'Play again', { fontSize: '32px', fill: '#fff' });
-      this.centerButtonText(this.gameText, this.gameButton);
-  
-      this.gameButton.on('pointerdown', () => {
-        this.scene.start('Game');
-      });
-  
-      this.endGameText = this.add.text(0, 0, 'End game', { fontSize: '32px', fill: '#fff' });
-      this.centerButtonText(this.endGameText, this.endButton);
-  
-      this.endButton.on('pointerdown', () => {
-        this.scene.start('Credits');
-      });
-
-      this.endButton.on('pointerover', () => {
-        this.endButton.setTexture('blueButton2');
-      });
-  
-      this.endButton.on('pointerout', () => {
-        this.endButton.setTexture('blueButton1');
-      });
-
-      this.gameButton.on('pointerover', () => {
-        this.gameButton.setTexture('blueButton2');
-      });
-  
-      this.gameButton.on('pointerout', () => {
-        this.gameButton.setTexture('blueButton1');
-      });
+      this.showButtons();
   }
 
   centerButtonText(gameText, gameButton) {

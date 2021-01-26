@@ -9,36 +9,36 @@ export default class LeaderBoard{
       let arrayScores = [];
       fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.gameId}/scores`)
       .then((result) => result.json())
+      .catch((error) => {
+        reject(error)
+      })
       .then(({result}) => {
         result.forEach(({user, score}) => {
           arrayScores.push({user, score});
         })
-        if (arrayScores === [])
-          reject(new Error("An error ocurred"))
-        else
-          resolve(arrayScores)
+        resolve(arrayScores)
       })
     })
   }
   
   async createScore (player, score) {
-    let values = JSON.stringify({"user": player, "score": parseInt(score)});
+    return new Promise((resolve, reject) => {
+      let values = JSON.stringify({"user": player, "score": parseInt(score)});
 
-    let submitScore = await
-    fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.gameId}/scores/`, 
-    {
-      method: 'post',
-      mode: 'cors',
-      headers: {"Content-type": "application/json;charset=UTF-8"},
-      body: values
+      fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.gameId}/scores/`, 
+      {
+        method: 'post',
+        mode: 'cors',
+        headers: {"Content-type": "application/json;charset=UTF-8"},
+        body: values
+      }).then((result) => {result.json()})
+      .catch((error) => {
+        reject(error)
+      })
+      .then((data) => {
+        resolve(this.getScores())
+      })
     })
-  
-    let submissionJSON = submitScore.json();
-    let scores = await submissionJSON.then(() => {
-      return this.getScores();
-    })   
-
-    return scores
   }
   
   async createGame () {  
@@ -59,7 +59,6 @@ export default class LeaderBoard{
         resolve(this.gameId);
       })
       .catch((error) => {
-        console.log(error)
         reject(error)
       })
     });
