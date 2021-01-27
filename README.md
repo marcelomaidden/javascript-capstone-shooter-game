@@ -76,6 +76,11 @@ To make any change,
   This game has only one scene where the player can move sidewards and jump.
   Zombies appear at random locations and throw their arms to defeat the player, so the player should always be moving and escape from them. You should kill as many zombies as possible because a score is kept for the ones who killed more zombies.  
 
+## How to save your score
+
+  In order to save your score when your player dies, a virtual keyboard will appear on the screen, so you can use Left, Right, Up and Down cursor as well as A, D, W and S KEYs to move left, right, up and down and choose your letter names. After choose the letter press Space KEY or ENTER key to enter your name. 
+  Navigate to the END button to send your score to the LeaderBoard API.
+
 ## Author
 
 👤  **Marcelo Fernandes**
