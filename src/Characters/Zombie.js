@@ -77,7 +77,7 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite {
     const speed = 50;
     this.body.setVelocity(
       Math.cos(angle) * speed,
-      Math.sin(angle) * speed,
+      20000,
     );
 
 

@@ -4,51 +4,56 @@ import Bullet from '../Attacks/Bullet';
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
   addAnimation() {
-    this.scene.anims.create({
-      key: 'right',
-      frames: [
-        { key: 'hero1' },
-        { key: 'hero2' },
-        { key: 'hero3' },
-        { key: 'hero4' },
-        { key: 'hero5' },
-        { key: 'hero6' },
-        { key: 'hero7' },
-        { key: 'hero8' },
-        { key: 'hero9' },
-        { key: 'hero10' },
-      ],
-      frameRate: 20,
-      repeat: 0,
-    });
+    if (!this.scene.anims.get('right')) {
+      this.scene.anims.create({
+        key: 'right',
+        frames: [
+          { key: 'hero1' },
+          { key: 'hero2' },
+          { key: 'hero3' },
+          { key: 'hero4' },
+          { key: 'hero5' },
+          { key: 'hero6' },
+          { key: 'hero7' },
+          { key: 'hero8' },
+          { key: 'hero9' },
+          { key: 'hero10' },
+        ],
+        frameRate: 20,
+        repeat: 0,
+      });
+    }
 
+    if (!this.scene.anims.get('left')) {
+      this.scene.anims.create({
+        key: 'left',
+        frames: [
+          { key: 'hero11' },
+          { key: 'hero12' },
+          { key: 'hero13' },
+          { key: 'hero14' },
+          { key: 'hero15' },
+          { key: 'hero16' },
+          { key: 'hero17' },
+          { key: 'hero18' },
+          { key: 'hero19' },
+          { key: 'hero20' },
+        ],
+        frameRate: 20,
+        repeat: 0,
+      });
+    }
 
-    this.scene.anims.create({
-      key: 'left',
-      frames: [
-        { key: 'hero11' },
-        { key: 'hero12' },
-        { key: 'hero13' },
-        { key: 'hero14' },
-        { key: 'hero15' },
-        { key: 'hero16' },
-        { key: 'hero17' },
-        { key: 'hero18' },
-        { key: 'hero19' },
-        { key: 'hero20' },
-      ],
-      frameRate: 20,
-      repeat: 0,
-    });
-
-    this.scene.anims.create({
-      key: 'turn',
-      frames: [
-        {
-          key: 'hero1',
-        }],
-      frameRate: 20,
-    });
+    if (!this.scene.anims.get('turn')) {
+      this.scene.anims.create({
+        key: 'turn',
+        frames: [
+          {
+            key: 'hero1',
+          }],
+        frameRate: 20,
+      });
+    }
   }
 
   constructor(scene, x, y, texture) {

@@ -171,12 +171,11 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.armGroup, this.player, () => {
-      this.player.disableBody();
       this.scene.start('Options', { score: zombiesKilled });
     });
 
     this.physics.add.collider(this.zombieGroup, this.player, () => {
-      this.player.disableBody();
+      this.isDead = true;
       this.scene.start('Options', { score: zombiesKilled });
     });
 
@@ -195,9 +194,21 @@ export default class GameScene extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
+
+    this.zombieRate = 1000;
+    this.nextZombieUpdate = 0;
   }
 
   update() {
     this.player.update();
+
+    if (this.time.now > this.nextZombieUpdate) {
+      this.nextZombieUpdate = this.time.now + this.zombieRate;
+
+      for (let i = 0; i < this.zombieGroup.getChildren().length; i += 1) {
+        const zombie = this.zombieGroup.getChildren()[i];
+        zombie.update();
+      }
+    }
   }
 }

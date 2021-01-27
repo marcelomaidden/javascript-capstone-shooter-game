@@ -55,13 +55,13 @@ To make any change,
 
   - Change directory to javascript-capstone-shooter-game `cd javascript-capstone-shooter-game`
   - Install all project dependencies `npm install`
-  - Run in your terminal `npm run start` to start the game
+  - Run in your terminal `npm start` to start the game
   - Go to your preferred browser and open `localhost:8000`
   - Click the `Play` button and have fun
 
 ## Integration tests
 
-  - In order to test the code run in your terminal `npm run test`
+  - In order to test the code run in your terminal `npm test`
 
 ## Game Controls
 
@@ -74,7 +74,7 @@ To make any change,
 ## Game story
 
   This game has only one scene where the player can move sidewards and jump.
-  Zombies appear at random locations and throw their arms to defeat the player, so the player should always be moving and scape from them. You should kill as many zombies as possible because a score is kept for the ones who killed more zombies.  
+  Zombies appear at random locations and throw their arms to defeat the player, so the player should always be moving and escape from them. You should kill as many zombies as possible because a score is kept for the ones who killed more zombies.  
 
 ## Author
 

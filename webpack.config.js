@@ -27,5 +27,7 @@ module.exports = {
       WEBGL_RENDERER: JSON.stringify(true),
     }),
   ],
-
+  devServer: {
+    port: 8080,
+  },
 };

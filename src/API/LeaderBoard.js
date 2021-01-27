@@ -16,23 +16,31 @@ export default class LeaderBoard {
           result.forEach(({ user, score }) => {
             arrayScores.push({ user, score });
           });
-          const sortedArray = arrayScores.sort((a, b) => b.score + a.score);
+          const sortedArray = arrayScores.sort((a, b) => {
+            b = parseInt(b.score, 10);
+            a = parseInt(a.score, 10);
+            return b - a;
+          });
           resolve(sortedArray);
         });
     });
   }
 
-  async createScore(player, score) {
+  async createScore(player, playerScore) {
     return new Promise((resolve, reject) => {
-      const values = JSON.stringify({ user: player, score: parseInt(score, 10) });
-
-      fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.gameId}/scores/`,
+      const scoreObj = { user: player, score: String(playerScore) };
+      const values = JSON.stringify(scoreObj);
+      fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.gameId}/scores`,
         {
-          method: 'post',
+          method: 'POST',
           mode: 'cors',
-          headers: { 'Content-type': 'application/json;charset=UTF-8' },
+          headers: { 'Content-type': 'application/json' },
           body: values,
-        }).then((result) => { result.json(); })
+        })
+        .then((result) => {
+          if (result.ok) return result.json();
+          throw new Error('An error ocurred');
+        })
         .catch((error) => {
           reject(error);
         })
@@ -48,7 +56,7 @@ export default class LeaderBoard {
       const JSONName = JSON.stringify(gameName);
       fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games',
         {
-          method: 'post',
+          method: 'POST',
           mode: 'cors',
           headers: { 'Content-type': 'application/json;charset=UTF-8' },
           body: JSONName,
