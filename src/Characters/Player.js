@@ -74,6 +74,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     /* limit number of shots */
     this.fireRate = 1000;
     this.nextFire = 0;
+
+    this.jumpRate = 350;
+    this.nextJump = 0;
   }
 
   update() {
@@ -107,9 +110,14 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     if ((this.scene.cursors.up.isDown || this.scene.keyW.isDown) && this.body.touching.down) {
-      setTimeout(() => {
-        this.body.velocity.y = -1000;
-      }, 260);
+        if (this.scene.time.now > this.nextJump) {
+          this.nextJump = this.scene.time.now + this.jumpRate;
+          this.body.velocity.y = -15000;
+          this.body.allowGravity = false
+          setTimeout(() => {
+            this.body.allowGravity = true
+          }, 160)
+        }         
     }
   }
 }
