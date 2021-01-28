@@ -16,6 +16,7 @@ export default class OptionsScene extends Phaser.Scene {
     this.load.image('rub', 'assets/ui/rub.png');
     this.load.image('end', 'assets/ui/end.png');
     this.load.bitmapFont('arcade', 'assets/ui/arcade.png', 'assets/ui/arcade.xml');
+    this.submited = false;
   }
 
   async scores() {
@@ -114,11 +115,12 @@ export default class OptionsScene extends Phaser.Scene {
         }
       } else if (event.keyCode === 13 || event.keyCode === 32) {
         //  Enter or Space
-        if (cursor.x === 9 && cursor.y === 2 && this.name.length > 0) {
+        if (cursor.x === 9 && cursor.y === 2 && this.name.length > 0 && this.submited === false) {
           //  Submit to API
           this.scores();
 
           this.showButtons();
+          this.submited = true;
         } else if (cursor.x === 8 && cursor.y === 2 && this.name.length > 0) {
           //  Rub
           this.name = this.name.substr(0, this.name.length - 1);

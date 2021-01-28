@@ -8,6 +8,15 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
+  init() {
+    if(this.player)
+    {
+      this.player.destroy();
+
+      this.player = new Player(this, 0, 100, 'hero');
+    }
+  }
+
   loadHero() {
     /* right movement images hero */
     this.load.image('hero1', 'assets/characters/hero/jared0055.png');
@@ -166,7 +175,7 @@ export default class GameScene extends Phaser.Scene {
       zombiesKilled += 1;
       zombiesKilledText.setText(`Killed: ${zombiesKilled}`);
       bullet.destroy();
-      zombie.disableBody();
+      zombie.destroy();
       zombie.visible = false;
     });
 
